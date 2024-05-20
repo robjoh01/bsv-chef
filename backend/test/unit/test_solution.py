@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Command: python -m pytest -m unit
+
 # Test get_recipe() method
 
 # Ground truth:
@@ -35,11 +37,12 @@ from src.util.dao import getDao
 
 @pytest.mark.unit
 def test_get_recipe_readiness_empty():
-    controller = RecipeController(items_dao=getDao(collection_name='item'))
+    controller = RecipeController(items_dao=getDao(collection_name="item"))
 
-    controller.get_readiness_of_recipes = MagicMock(return_value=[])
+    controller.get_readiness_of_recipes = MagicMock(return_value=dict())
+
+    print("Test: " + controller.get_readiness_of_recipes(recipes=[], diet=Diet.NORMAL))
+
     result = controller.get_recipe(diet=Diet.NORMAL, take_best=True)
-
-    print("Hello, World!")
 
     assert result is None
