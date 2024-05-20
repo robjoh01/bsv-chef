@@ -34,11 +34,13 @@ from src.util.dao import getDao
 from unittest.mock import MagicMock
 
 @pytest.mark.unit
-def get_recipe_test_readiness_empty():
+def test_get_recipe_readiness_empty():
     dao = getDao(collection_name='item')
     controller = RecipeController(items_dao=dao)
 
     controller.get_readiness_of_recipes = MagicMock(return_value=[])
     result = controller.get_recipe(diet=Diet.NORMAL, take_best=True)
 
-    assert result == None
+    print("Hello, World!")
+
+    assert result is None
