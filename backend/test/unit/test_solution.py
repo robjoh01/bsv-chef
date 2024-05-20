@@ -27,16 +27,15 @@
 
 import pytest
 
+from unittest.mock import MagicMock
+
 from src.controllers.recipecontroller import RecipeController
 from src.static.diets import Diet
-
 from src.util.dao import getDao
-from unittest.mock import MagicMock
 
 @pytest.mark.unit
 def test_get_recipe_readiness_empty():
-    dao = getDao(collection_name='item')
-    controller = RecipeController(items_dao=dao)
+    controller = RecipeController(items_dao=getDao(collection_name='item'))
 
     controller.get_readiness_of_recipes = MagicMock(return_value=[])
     result = controller.get_recipe(diet=Diet.NORMAL, take_best=True)
